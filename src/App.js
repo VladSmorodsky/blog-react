@@ -1,9 +1,9 @@
+import {BlogPage} from "./pages/BlogPage";
+
 function App() {
-  return (
-    <div className={'text-4xl'}>
-        Blog Post
-    </div>
-  );
+    return (
+        <BlogPage></BlogPage>
+    );
 }
 
 export default App;
