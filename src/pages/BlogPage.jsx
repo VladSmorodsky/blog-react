@@ -6,6 +6,7 @@ import Pagination from "rc-pagination";
 import {ChevronLeft} from "../assets/ChevronLeft";
 import {ChevronRight} from "../assets/ChevronRight";
 import {PaginationButton} from "../components/PaginationButton";
+import {Header} from "../components/Header";
 
 export const BlogPage = () => {
     useQueryClient()
@@ -14,12 +15,13 @@ export const BlogPage = () => {
 
     return (
         <section>
-            <div className="py-16">
-                <div className="mx-auto px-6 max-w-6xl">
+            <Header />
+            <div className="py-20">
+                <div className="lg:px-14 px-6">
                     <div className="text-center">
-                        <span className="text-5xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold">Blog</span>
+                        <span className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold py-2">Blog</span>
                     </div>
-                    <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         {data?.data.map((post, index) => {
                             return <PostCard key={index} post={post}/>;
                         })}
