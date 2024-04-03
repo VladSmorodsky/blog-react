@@ -1,4 +1,4 @@
-import {useQuery, useQueryClient} from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import {getPosts} from "../api/posts";
 
 export const usePostsQuery = ({page = 1}) => {
