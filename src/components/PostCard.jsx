@@ -13,7 +13,7 @@ export const PostCard = ({post}) => {
                 </div>
             </div>
             <div className={"p-8"}>
-                <Link className={'text-2xl text-violet-500 font-semibold'} to={`/post/${post.id}`}>{post.title.toUpperCase()}</Link>
+                <Link className={'text-xl text-violet-500 font-semibold'} to={`/post/${post.id}`}>{post.title.toUpperCase()}</Link>
             </div>
         </div>
     );

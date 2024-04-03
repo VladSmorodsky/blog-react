@@ -1,5 +1,6 @@
 import {useParams} from "react-router-dom";
 import {useSinglePostQuery} from "../hooks/useSinglePostQuery";
+import {Header} from "../components/Header";
 
 export const PostPage = () => {
     const {id} = useParams();
@@ -9,7 +10,8 @@ export const PostPage = () => {
 
     return (
         <section>
-            <div className="py-16">
+            <Header/>
+            <div className="py-20">
                 {!isFetching && (
                     <div>
                         <div className="mx-auto px-6 max-w-6xl">
