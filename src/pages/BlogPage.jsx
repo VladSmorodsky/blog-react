@@ -7,11 +7,33 @@ import {ChevronLeft} from "../assets/ChevronLeft";
 import {ChevronRight} from "../assets/ChevronRight";
 import {PaginationButton} from "../components/PaginationButton";
 import {Header} from "../components/Header";
+import {useCategoriesQuery} from "../hooks/useCategoriesQuery";
+import {CategoryBadge} from "../components/CategoryBadge";
 
 export const BlogPage = () => {
-    useQueryClient()
-    const [currentPage, setCurrentPage] = useState(1);
-    const {data, isFetching} = usePostsQuery({page: currentPage});
+    useQueryClient();
+    const [filterParams, setFilterParams] = useState({
+        page: 1,
+        category: null
+    });
+    const {data, isFetching} = usePostsQuery(filterParams);
+    const {data: categories} = useCategoriesQuery();
+    const defaultCategory = {id: null, title: 'All'}
+
+    const setPage = (page) => {
+        setFilterParams((prevState) => ({
+            ...prevState,
+            page: page
+        }));
+    }
+
+    const setCategory = (categoryId) => {
+        setFilterParams((prevState) => ({
+            ...prevState,
+            page: 1,
+            category: categoryId
+        }))
+    };
 
     return (
         <section>
@@ -20,6 +42,12 @@ export const BlogPage = () => {
                 <div className="lg:px-14 px-6">
                     <div className="text-center">
                         <span className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold py-2">Blog</span>
+                    </div>
+                    <div className={'flex'}>
+                        <CategoryBadge className={'text-xl'} category={defaultCategory} onClick={() => setCategory(defaultCategory.id)}/>
+                        {categories?.data.map((category, index) => {
+                            return (<CategoryBadge key={index} className={'text-xl'} category={category} onClick={() => setCategory(category.id)} />)
+                        })}
                     </div>
                     <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
                         {data?.data.map((post, index) => {
@@ -30,23 +58,23 @@ export const BlogPage = () => {
             </div>
             {!isFetching && (<Pagination
                 className='flex justify-center items-center text-xl mb-2'
-                current={currentPage}
+                current={filterParams.page}
                 showLessItems
-                onChange={setCurrentPage}
+                onChange={setPage}
                 pageSize={data?.pagination.rowsPerPage}
                 total={data?.pagination.totalRows}
                 showTitle={false}
                 itemRender={(page, type) => {
-                    const onClick = () => setCurrentPage(page);
+                    const onClick = () => setPage(page);
                     if (type === 'prev') {
-                        return <PaginationButton onClick={page === 0 ? () => setCurrentPage(1) : onClick}><ChevronLeft/></PaginationButton>
+                        return <PaginationButton onClick={page === 0 ? () => setPage(1) : onClick}><ChevronLeft/></PaginationButton>
                     }
                     if (type === 'next') {
                         return <PaginationButton onClick={onClick}><ChevronRight/></PaginationButton>
                     }
 
                     return <PaginationButton onClick={onClick}
-                                             active={currentPage === page}>
+                                             active={filterParams.page === page}>
                         {page}
                     </PaginationButton>
                 }}

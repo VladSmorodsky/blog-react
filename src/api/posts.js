@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const getPosts = async (page = 1) => {
-    const {data} = await axios.get('/posts', {params: {page}});
+export const getPosts = async (page = 1, category = null) => {
+    const {data} = await axios.get('/posts', {params: {page, category}});
 
     return data;
 }
