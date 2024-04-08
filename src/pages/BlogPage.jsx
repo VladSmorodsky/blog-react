@@ -44,9 +44,9 @@ export const BlogPage = () => {
                         <span className="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500 font-extrabold py-2">Blog</span>
                     </div>
                     <div className={'flex'}>
-                        <CategoryBadge className={'text-xl'} category={defaultCategory} onClick={() => setCategory(defaultCategory.id)}/>
+                        <CategoryBadge className={'text-xl'} category={defaultCategory} className={`text-xl ${defaultCategory.id === filterParams.category ? 'border border-purple-600' : ''}`} onClick={() => setCategory(defaultCategory.id)}/>
                         {categories?.data.map((category, index) => {
-                            return (<CategoryBadge key={index} className={'text-xl'} category={category} onClick={() => setCategory(category.id)} />)
+                            return (<CategoryBadge key={index} className={`text-xl ${category.id === filterParams.category ? 'border border-purple-600' : ''}`} category={category} onClick={() => setCategory(category.id)} />)
                         })}
                     </div>
                     <div className="mt-9 grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -73,8 +73,7 @@ export const BlogPage = () => {
                         return <PaginationButton onClick={onClick}><ChevronRight/></PaginationButton>
                     }
 
-                    return <PaginationButton onClick={onClick}
-                                             active={filterParams.page === page}>
+                    return <PaginationButton onClick={onClick} active={filterParams.page === page}>
                         {page}
                     </PaginationButton>
                 }}
