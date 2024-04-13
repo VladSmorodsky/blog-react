@@ -1,0 +1,20 @@
+import {Header} from "../../components/Header";
+import {ADMIN_CATEGORIES_PAGE, ADMIN_POSTS_PAGE} from "../../router";
+import {MenuItem} from "./MenuItem";
+
+export const AdminPage = ({children}) => {
+    return <>
+        <Header className={'justify-between'}>
+            <div>Test User</div>
+        </Header>
+        <div className={'pt-16 grid lg:grid-cols-[1fr,5fr] md:grid-cols-[1fr,3fr] gap-2 h-lvh'}>
+            <div className={'flex relative flex-col flex-1 pt-0 min-h-0 border-r border-black-500'}>
+                <div className={'flex flex-col'}>
+                    <MenuItem path={ADMIN_POSTS_PAGE}>POSTS</MenuItem>
+                    <MenuItem path={ADMIN_CATEGORIES_PAGE}>CATEGORIES</MenuItem>
+                </div>
+            </div>
+            {children}
+        </div>
+    </>
+}
