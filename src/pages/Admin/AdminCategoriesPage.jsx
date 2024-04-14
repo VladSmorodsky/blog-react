@@ -1,4 +1,4 @@
-export const AdminCategories = () => {
+export const AdminCategoriesPage = () => {
     return <div>
         Admin Categories
     </div>
