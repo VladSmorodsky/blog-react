@@ -6,10 +6,8 @@ export const PostPage = () => {
     const {id} = useParams();
     const {data, isFetching, isError} = useSinglePostQuery(id)
 
-    console.log(data)
-
     return (
-        <section>
+        <section id='blog'>
             <Header/>
             <div className="py-20">
                 {!isFetching && (

@@ -5,8 +5,9 @@ import {NotFoundPage} from "./pages/NotFoundPage";
 import {LoginPage} from "./pages/LoginPage";
 import {ProtectedRoute} from "./components/ProtectedRoute";
 import {AdminPage} from "./pages/Admin/AdminPage";
-import {AdminPosts} from "./pages/Admin/AdminPosts";
-import {AdminCategories} from "./pages/Admin/AdminCategories";
+import {AdminPostsPage} from "./pages/Admin/AdminPostsPage";
+import {AdminCategoriesPage} from "./pages/Admin/AdminCategoriesPage";
+import {PostEditPage} from "./pages/Admin/PostEditPage";
 
 export const POST_PAGE = '/post/:id';
 export const MAIN_PAGE = '/';
@@ -15,6 +16,7 @@ export const NOT_FOUND_PAGE = '*';
 export const ADMIN_PAGE = '/admin';
 export const ADMIN_CATEGORIES_PAGE = `${ADMIN_PAGE}/categories`
 export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`
+export const ADMIN_EDIT_POST_PAGE = `${ADMIN_POSTS_PAGE}/:id/edit`
 
 export const router = createBrowserRouter([
     {
@@ -44,13 +46,19 @@ export const router = createBrowserRouter([
             {
                 path: ADMIN_POSTS_PAGE,
                 element: <AdminPage>
-                    <AdminPosts/>
+                    <AdminPostsPage/>
                 </AdminPage>
             },
             {
                 path: ADMIN_CATEGORIES_PAGE,
                 element: <AdminPage>
-                    <AdminCategories/>
+                    <AdminCategoriesPage/>
+                </AdminPage>
+            },
+            {
+                path: ADMIN_EDIT_POST_PAGE,
+                element: <AdminPage>
+                    <PostEditPage/>
                 </AdminPage>
             },
         ]

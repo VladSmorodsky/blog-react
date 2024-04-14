@@ -5,6 +5,7 @@ export const usePostsQuery = ({page = 1, category = null}) => {
     return useQuery({
         queryKey: ['posts', page, category],
         queryFn: () => getPosts(page, category),
-        keepPreviousData: true
+        keepPreviousData: true,
+        cacheTime: 5000
     });
 }
