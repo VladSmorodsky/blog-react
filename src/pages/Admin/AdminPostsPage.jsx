@@ -6,6 +6,11 @@ import {ChevronLeft} from "../../assets/ChevronLeft";
 import {ChevronRight} from "../../assets/ChevronRight";
 import {useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
+import {Button} from "../../components/Button/Button";
+import {NavLink} from "react-router-dom";
+import {ADMIN_POSTS_CREATE_PAGE} from "../../router";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const AdminPostsPage = () => {
     useQueryClient();
@@ -25,8 +30,16 @@ export const AdminPostsPage = () => {
 
     return (
         <div className="p-2">
-            <div className={'uppercase font-semibold text-xl mb-2'}>
-                posts
+            <div className='flex justify-between'>
+                <div className={'uppercase font-semibold text-xl mb-2'}>
+                    posts
+                </div>
+                <NavLink to={ADMIN_POSTS_CREATE_PAGE}>
+                    <Button className='uppercase rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-800 px-2 py-1'>
+                        <FontAwesomeIcon icon={faPlus}/>
+                        <span className='ml-2'>Create</span>
+                    </Button>
+                </NavLink>
             </div>
             {isFetching && (
                 <p>Loading..</p>

@@ -1,5 +1,5 @@
-export const Button = ({className, onClick, children}) => {
+export const Button = ({className, onClick, children, type= 'button'}) => {
     return (
-        <div className={`cursor-pointer rounded p-1 ${className}`} onClick={onClick}>{children}</div>
+        <button type={type} className={`cursor-pointer rounded p-1 ${className}`} onClick={onClick}>{children}</button>
     );
 }

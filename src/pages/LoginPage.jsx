@@ -14,8 +14,8 @@ export const LoginPage = () => {
 
     const handleLogin = async (email, password) => {
         try {
-            const userData = await login(email, password);
-            setUser(userData);
+            const {data} = await login(email, password);
+            setUser({email: data.email, token: data.token});
             navigate(ADMIN_PAGE);
         } catch (err) {
             setErrorText(err.response.data.message)
