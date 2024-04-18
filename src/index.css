@@ -43,6 +43,10 @@ code {
     background: #555;
 }
 
+.post-content .ProseMirror {
+    height: fit-content;
+}
+
 .ProseMirror {
     height: 30rem;
 }

@@ -11,3 +11,9 @@ export const getPost = async (postId) => {
 
     return data;
 }
+
+export const createPost = async (postData, config) => {
+    const {data} = await axios.post('/posts', postData, config)
+
+    return data;
+}

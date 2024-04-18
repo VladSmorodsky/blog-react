@@ -1,20 +1,14 @@
 import {StarterKit} from "@tiptap/starter-kit";
-import {BubbleMenu, EditorProvider, FloatingMenu} from "@tiptap/react";
+import {EditorProvider} from "@tiptap/react";
 import {EditorMenu} from "./Editor/EditorMenu";
 
-const extensions = [
-    StarterKit
-]
-
-const content = '<p>Hello World!</p>'
-
-export const Editor =() => {
+export const Editor = ({showEditorMenu = true, content, setContent}) => {
     return (
         <div id={'editor'}>
             <EditorProvider
-                extensions={extensions}
+                extensions={[StarterKit]}
                 content={content}
-                slotBefore={<EditorMenu/>}
+                slotBefore={showEditorMenu ? <EditorMenu/> : ''}
                 editorProps={
                     {
                         attributes: {
@@ -22,8 +16,10 @@ export const Editor =() => {
                         }
                     }
                 }
-            >
-            </EditorProvider>
+                onUpdate={({ editor }) => {
+                    setContent(editor.getJSON());
+                }}
+            />
         </div>
     );
 }
