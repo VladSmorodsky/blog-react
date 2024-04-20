@@ -14,11 +14,11 @@ export const POST_PAGE = '/post/:id';
 export const MAIN_PAGE = '/';
 export const LOGIN_PAGE = '/login';
 export const NOT_FOUND_PAGE = '*';
-export const ADMIN_PAGE = '/admin';
+export const ADMIN_PAGE = '/admin/posts';
 export const ADMIN_CATEGORIES_PAGE = `${ADMIN_PAGE}/categories`
-export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`
+// export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`
 export const ADMIN_POSTS_CREATE_PAGE = `${ADMIN_PAGE}/posts/create`
-export const ADMIN_EDIT_POST_PAGE = `${ADMIN_POSTS_PAGE}/:id/edit`
+export const ADMIN_EDIT_POST_PAGE = `${ADMIN_PAGE}/:id/edit`
 
 export const router = createBrowserRouter([
     {
@@ -43,10 +43,6 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: ADMIN_PAGE,
-                element: <AdminPage/>
-            },
-            {
-                path: ADMIN_POSTS_PAGE,
                 element: <AdminPage>
                     <AdminPostsPage/>
                 </AdminPage>

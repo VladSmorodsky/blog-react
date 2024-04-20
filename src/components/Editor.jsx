@@ -1,23 +1,25 @@
 import {StarterKit} from "@tiptap/starter-kit";
+import {Image} from "@tiptap/extension-image";
 import {EditorProvider} from "@tiptap/react";
 import {EditorMenu} from "./Editor/EditorMenu";
 
-export const Editor = ({showEditorMenu = true, content, setContent}) => {
+export const Editor = ({content = '', onUpdate = () => {}, editable = true}) => {
     return (
         <div id={'editor'}>
             <EditorProvider
-                extensions={[StarterKit]}
+                extensions={[StarterKit, Image]}
                 content={content}
-                slotBefore={showEditorMenu ? <EditorMenu/> : ''}
+                editable={editable}
+                slotBefore={editable ? <EditorMenu/> : ''}
                 editorProps={
                     {
                         attributes: {
-                            class: 'border border-black-500 shadow-lg overflow-auto p-3 focus:outline-none'
+                            class: editable ? 'border border-black-500 shadow-lg overflow-auto p-3 focus:outline-none' : ''
                         }
                     }
                 }
                 onUpdate={({ editor }) => {
-                    setContent(editor.getJSON());
+                    onUpdate(editor.getJSON());
                 }}
             />
         </div>
