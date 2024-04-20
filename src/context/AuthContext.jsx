@@ -16,7 +16,7 @@ export const AuthProvider = ({children}) => {
             localStorage.setItem('user', JSON.stringify(user));
         } else {
             delete axios.defaults.headers.common["Authorization"];
-            localStorage.removeItem('token')
+            localStorage.removeItem('user')
         }
     }, [user]);
 

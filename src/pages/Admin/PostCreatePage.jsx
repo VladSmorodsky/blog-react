@@ -5,7 +5,7 @@ import {Button} from "../../components/Button/Button";
 import {useAuthContext} from "../../context/AuthContext";
 import {createPost} from "../../api/posts";
 import {useNavigate} from "react-router-dom";
-import {ADMIN_POSTS_PAGE, LOGIN_PAGE} from "../../router";
+import {ADMIN_PAGE, LOGIN_PAGE} from "../../router";
 import {useCategoriesQuery} from "../../hooks/useCategoriesQuery";
 
 export const PostCreatePage = () => {
@@ -29,7 +29,7 @@ export const PostCreatePage = () => {
             });
             //TODO Implement notification
 
-            navigate(ADMIN_POSTS_PAGE);
+            navigate(ADMIN_PAGE);
         } catch (err) {
             if (err.response.status === 401) {
                 setUser(null);
@@ -63,7 +63,11 @@ export const PostCreatePage = () => {
                 </select>
             </div>
             <div className='mb-2'>
-                <Editor content={content} setContent={onContentChange}/>
+                <Editor
+                    content={content}
+                    onUpdate={onContentChange}
+                    showEditorMenu={true}
+                />
             </div>
             <div className='mb-2 flex justify-center'>
                 <Button type='submit'
