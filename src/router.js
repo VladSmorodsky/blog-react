@@ -17,7 +17,7 @@ export const NOT_FOUND_PAGE = '*';
 export const ADMIN_PAGE = '/admin/posts';
 export const ADMIN_CATEGORIES_PAGE = `${ADMIN_PAGE}/categories`
 // export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`
-export const ADMIN_POSTS_CREATE_PAGE = `${ADMIN_PAGE}/posts/create`
+export const ADMIN_POSTS_CREATE_PAGE = `${ADMIN_PAGE}/create`
 export const ADMIN_EDIT_POST_PAGE = `${ADMIN_PAGE}/:id/edit`
 
 export const router = createBrowserRouter([
