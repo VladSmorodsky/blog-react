@@ -7,7 +7,7 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import axios from "axios";
 import {AuthProvider} from "./context/AuthContext";
 
-axios.defaults.baseURL = process.env.REACT_APP_BE_HOST;
+axios.defaults.baseURL = `${process.env.REACT_APP_BE_HOST}/api/v1`;
 
 const queryClient = new QueryClient()
 const root = ReactDOM.createRoot(document.getElementById('root'));

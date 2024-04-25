@@ -5,7 +5,7 @@ export const PostCard = ({post}) => {
     return (
         <div
             className="relative group overflow-hidden rounded-xl bg-white border border-gray-200">
-            <div className={"h-48 bg-cover bg-center"} style={{backgroundImage: `url(https://picsum.photos/200)`}}>
+            <div className={"h-48 bg-cover bg-center"} style={{backgroundImage: post.imageCover ? `url(${process.env.REACT_APP_BE_HOST}/upload/${post.id}/${post.imageCover})` : `url(https://picsum.photos/200)`}}>
                 <div className='flex justify-end'>
                     <CategoryBadge category={post.category} className={'text-sm'}/>
                 </div>
