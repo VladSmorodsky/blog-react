@@ -7,12 +7,14 @@ import {createPost} from "../../api/posts";
 import {useNavigate} from "react-router-dom";
 import {ADMIN_PAGE, LOGIN_PAGE} from "../../router";
 import {useCategoriesQuery} from "../../hooks/useCategoriesQuery";
+import {UploadImage} from "../../components/UploadImage";
 
 export const PostCreatePage = () => {
     const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [categoryId, setCategoryId] = useState(0);
+    const [imageCover, setImageCover] = useState(null);
     const {user, setUser} = useAuthContext();
     const {data: categories, isFetching} = useCategoriesQuery();
 
@@ -24,8 +26,9 @@ export const PostCreatePage = () => {
         event.preventDefault();
 
         try {
-            const data = await createPost({title, content, categoryId}, {
-                headers: { Authorization: `Bearer ${user.token}` }
+            console.log('[img]', imageCover)
+            const data = await createPost({title, content, categoryId, imageCover}, {
+                headers: { Authorization: `Bearer ${user.token}`, 'Content-Type': 'multipart/form-data' }
             });
             //TODO Implement notification
 
@@ -43,7 +46,7 @@ export const PostCreatePage = () => {
         return <p>Loading...</p>
     }
 
-    return <div>Create Post
+    return <div className='overflow-auto'>Create Post
         <form onSubmit={onSubmit}>
             <div className='mb-2 flex'>
                 <Input name='title'
@@ -61,6 +64,9 @@ export const PostCreatePage = () => {
                         <option key={category.id} value={category.id}>{category.title}</option>
                     ))}
                 </select>
+            </div>
+            <div>
+                <UploadImage image={imageCover} setImage={setImageCover}/>
             </div>
             <div className='mb-2'>
                 <Editor
