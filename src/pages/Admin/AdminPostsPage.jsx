@@ -11,6 +11,7 @@ import {NavLink} from "react-router-dom";
 import {ADMIN_POSTS_CREATE_PAGE} from "../../router";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {DeletePostDialog} from "../../components/Dialog/DeletePostDialog";
 
 export const AdminPostsPage = () => {
     useQueryClient();
@@ -20,6 +21,19 @@ export const AdminPostsPage = () => {
         rowsPerPage: 0
     });
     const {data, isFetching} = usePostsQuery(filterParams);
+
+    const [deletedPost, setDeletedPost] = useState(null);
+    const [open, setOpen] = useState(false)
+
+    const onDeleteConfirmation = (post) => {
+        setDeletedPost(post)
+        setOpen(true);
+    }
+
+    const closeDialog = () => {
+        setDeletedPost(null);
+        setOpen(false);
+    }
 
     const setPage = (page) => {
         setFilterParams((prevState) => ({
@@ -46,7 +60,7 @@ export const AdminPostsPage = () => {
             )}
             {!isFetching && (
                 <>
-                    <PostsTable data={data?.data}/>
+                    <PostsTable data={data?.data} onConfirmationDelete={onDeleteConfirmation}/>
                     <div className='mt-2 flex justify-between align-middle'>
                         <Pagination
                             className='flex items-center text-xl mb-2'
@@ -85,6 +99,7 @@ export const AdminPostsPage = () => {
                             />
                         </div>
                     </div>
+                    <DeletePostDialog open={open} onCancel={closeDialog} deletedItem={deletedPost}/>
                 </>
             )}
         </div>

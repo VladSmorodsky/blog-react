@@ -23,3 +23,9 @@ export const updatePost = async (postId, postData, config) => {
 
     return data;
 }
+
+export const deletePost = async (postId, config) => {
+    const {data} = await axios.delete(`/posts/${postId}`, config)
+
+    return data;
+}
