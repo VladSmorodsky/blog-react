@@ -5,9 +5,10 @@ import {Button} from "../../components/Button/Button";
 import {useAuthContext} from "../../context/AuthContext";
 import {createPost} from "../../api/posts";
 import {useNavigate} from "react-router-dom";
-import {ADMIN_PAGE, LOGIN_PAGE} from "../../router";
-import {useCategoriesQuery} from "../../hooks/useCategoriesQuery";
+import {ADMIN_POSTS_PAGE, LOGIN_PAGE} from "../../router";
 import {UploadImage} from "../../components/UploadImage";
+import {CategorySelect} from "../../components/Select/CategorySelect";
+import {useCategoriesQuery} from "../../hooks/useCategoriesQuery";
 
 export const PostCreatePage = () => {
     const navigate = useNavigate();
@@ -16,7 +17,7 @@ export const PostCreatePage = () => {
     const [categoryId, setCategoryId] = useState(0);
     const [imageCover, setImageCover] = useState(null);
     const {user, setUser} = useAuthContext();
-    const {data: categories, isFetching} = useCategoriesQuery();
+    const {data: categories} = useCategoriesQuery();
 
     const onContentChange = (content) => {
         setContent(content)
@@ -26,13 +27,12 @@ export const PostCreatePage = () => {
         event.preventDefault();
 
         try {
-            console.log('[img]', imageCover)
-            const data = await createPost({title, content, categoryId, imageCover}, {
+            await createPost({title, content, categoryId, imageCover}, {
                 headers: { Authorization: `Bearer ${user.token}`, 'Content-Type': 'multipart/form-data' }
             });
             //TODO Implement notification
 
-            navigate(ADMIN_PAGE);
+            navigate(ADMIN_POSTS_PAGE);
         } catch (err) {
             if (err.response.status === 401) {
                 setUser(null);
@@ -40,10 +40,6 @@ export const PostCreatePage = () => {
             }
             console.log(err)
         }
-    }
-
-    if (isFetching) {
-        return <p>Loading...</p>
     }
 
     return <div className='overflow-auto'>Create Post
@@ -54,16 +50,9 @@ export const PostCreatePage = () => {
                        value={title}
                        required
                 />
-                <select
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    required
-                    onChange={(event) => setCategoryId(parseInt(event.target.value))}
-                >
-                    <option value={0}>Select category</option>
-                    {categories.data.map((category) => (
-                        <option key={category.id} value={category.id}>{category.title}</option>
-                    ))}
-                </select>
+                <CategorySelect onChange={setCategoryId}
+                                categories={categories?.data}
+                />
             </div>
             <div>
                 <UploadImage image={imageCover} setImage={setImageCover}/>
