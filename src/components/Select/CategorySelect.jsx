@@ -1,6 +1,6 @@
 import {Select} from "./Select";
 
-export const CategorySelect = ({categories, onChange}) => {
+export const CategorySelect = ({categories, onChange, value = 0}) => {
     const generateItems = () => {
         return categories.map(item => ({
             id: item.id,
@@ -9,6 +9,6 @@ export const CategorySelect = ({categories, onChange}) => {
     }
 
     return (
-        <Select items={generateItems()} onChange={onChange}/>
+        <Select items={generateItems()} onChange={onChange} value={value}/>
     );
 }

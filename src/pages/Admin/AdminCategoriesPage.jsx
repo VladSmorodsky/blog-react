@@ -26,7 +26,7 @@ export const AdminCategoriesPage = () => {
     }
 
     if (isFetching) {
-        <p>Loading..</p>
+        return <p>Loading..</p>
     }
 
     return <>
@@ -42,9 +42,6 @@ export const AdminCategoriesPage = () => {
                     </Button>
                 </NavLink>
             </div>
-            {isFetching && (
-                <p>Loading..</p>
-            )}
             {!isFetching && (
                 <CategoriesTable data={categories?.data} onConfirmationDelete={onDeleteConfirmation}/>
             )}

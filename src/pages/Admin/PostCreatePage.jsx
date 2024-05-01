@@ -50,9 +50,12 @@ export const PostCreatePage = () => {
                        value={title}
                        required
                 />
-                <CategorySelect onChange={setCategoryId}
-                                categories={categories?.data}
-                />
+                {categories?.data && (
+                    <CategorySelect onChange={setCategoryId}
+                                    categories={categories?.data}
+                                    value={categoryId}
+                    />
+                )}
             </div>
             <div>
                 <UploadImage image={imageCover} setImage={setImageCover}/>
