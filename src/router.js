@@ -9,16 +9,20 @@ import {AdminPostsPage} from "./pages/Admin/AdminPostsPage";
 import {AdminCategoriesPage} from "./pages/Admin/AdminCategoriesPage";
 import {PostEditPage} from "./pages/Admin/PostEditPage";
 import {PostCreatePage} from "./pages/Admin/PostCreatePage";
+import {CategoryCreatePage} from "./pages/Admin/CategoryCreatePage";
+import {CategoryEditPage} from "./pages/Admin/CategoryEditPage";
 
 export const POST_PAGE = '/post/:id';
 export const MAIN_PAGE = '/';
 export const LOGIN_PAGE = '/login';
 export const NOT_FOUND_PAGE = '*';
-export const ADMIN_PAGE = '/admin/posts';
-export const ADMIN_CATEGORIES_PAGE = `${ADMIN_PAGE}/categories`
-// export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`
-export const ADMIN_POSTS_CREATE_PAGE = `${ADMIN_PAGE}/create`
-export const ADMIN_EDIT_POST_PAGE = `${ADMIN_PAGE}/:id/edit`
+export const ADMIN_PAGE = '/admin';
+export const ADMIN_CATEGORIES_PAGE = `${ADMIN_PAGE}/categories`;
+export const ADMIN_POSTS_PAGE = `${ADMIN_PAGE}/posts`;
+export const ADMIN_POSTS_CREATE_PAGE = `${ADMIN_POSTS_PAGE}/create`;
+export const ADMIN_EDIT_POST_PAGE = `${ADMIN_POSTS_PAGE}/:id/edit`;
+export const ADMIN_CATEGORIES_CREATE_PAGE = `${ADMIN_CATEGORIES_PAGE}/create`;
+export const ADMIN_CATEGORIES_EDIT_PAGE = `${ADMIN_CATEGORIES_PAGE}/:id/edit`;
 
 export const router = createBrowserRouter([
     {
@@ -44,6 +48,12 @@ export const router = createBrowserRouter([
             {
                 path: ADMIN_PAGE,
                 element: <AdminPage>
+
+                </AdminPage>
+            },
+            {
+                path: ADMIN_POSTS_PAGE,
+                element: <AdminPage>
                     <AdminPostsPage/>
                 </AdminPage>
             },
@@ -65,6 +75,18 @@ export const router = createBrowserRouter([
                     <PostEditPage/>
                 </AdminPage>
             },
+            {
+                path: ADMIN_CATEGORIES_CREATE_PAGE,
+                element: <AdminPage>
+                    <CategoryCreatePage/>
+                </AdminPage>
+            },
+            {
+                path: ADMIN_CATEGORIES_EDIT_PAGE,
+                element: <AdminPage>
+                    <CategoryEditPage/>
+                </AdminPage>
+            }
         ]
     }
 ]);
