@@ -16,7 +16,6 @@ export const CategoryEditPage = () => {
 
     useEffect(() => {
         if (category?.data) {
-            console.log(category?.data)
             setTitle(category.data.title);
         }
     }, [category]);

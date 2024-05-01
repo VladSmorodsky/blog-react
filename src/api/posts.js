@@ -17,3 +17,9 @@ export const createPost = async (postData, config) => {
 
     return data;
 }
+
+export const updatePost = async (postId, postData, config) => {
+    const {data} = await axios.put(`/posts/${postId}`, postData, config)
+
+    return data;
+}

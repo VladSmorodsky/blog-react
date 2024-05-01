@@ -2,7 +2,7 @@ import {Table} from "./Table";
 import {createColumnHelper} from "@tanstack/react-table";
 import {EditButton} from "../Button/EditButton";
 import {NavLink} from "react-router-dom";
-import {ADMIN_PAGE} from "../../router";
+import {ADMIN_POSTS_PAGE} from "../../router";
 import {DeleteButton} from "../Button/DeleteButton";
 
 const columnHelper = createColumnHelper(); //useMemo
@@ -24,7 +24,7 @@ const columns = [
         header: 'actions',
         cell: props => (
             <div className={'flex'}>
-                <NavLink to={`${ADMIN_PAGE}/${props.row.getValue('id')}/edit`} className={'mr-1'}>
+                <NavLink to={`${ADMIN_POSTS_PAGE}/${props.row.getValue('id')}/edit`} className={'mr-1'}>
                     <EditButton/>
                 </NavLink>
                 <DeleteButton/>

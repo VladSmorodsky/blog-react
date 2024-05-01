@@ -13,7 +13,7 @@ export const UploadImage = ({image, setImage}) => {
             return;
         }
 
-        setImage(event.target.files[0])
+        setImage(file);
     }
 
     return (
@@ -52,7 +52,7 @@ export const UploadImage = ({image, setImage}) => {
                             </div>
                         </div>
                         <div className='w-44'>
-                            <img src={URL.createObjectURL(image)} alt=""/>
+                            <img src={URL.createObjectURL(image)} alt={image.name}/>
                             {image.name}
                         </div>
                     </div>
