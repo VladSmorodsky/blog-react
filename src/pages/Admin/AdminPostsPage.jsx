@@ -9,9 +9,10 @@ import {useQueryClient} from "@tanstack/react-query";
 import {Button} from "../../components/Button/Button";
 import {NavLink} from "react-router-dom";
 import {ADMIN_POSTS_CREATE_PAGE} from "../../router";
-import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faPlus, faSearch} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {DeletePostDialog} from "../../components/Dialog/DeletePostDialog";
+import {Input} from "../../components/Input/Input";
 
 export const AdminPostsPage = () => {
     useQueryClient();
@@ -42,18 +43,36 @@ export const AdminPostsPage = () => {
         }));
     }
 
+    const setSearch = (value) => {
+        setFilterParams((prevState) => ({
+            ...prevState,
+            page: 1,
+            search: value
+        }))
+    }
+
     return (
         <div className="p-2">
-            <div className='flex justify-between'>
-                <div className={'uppercase font-semibold text-xl mb-2'}>
-                    posts
+            <div className='flex justify-between align-middle mb-2'>
+                <div className={'uppercase font-semibold text-xl flex text-center'}>
+                    <span>posts</span>
                 </div>
-                <NavLink to={ADMIN_POSTS_CREATE_PAGE}>
-                    <Button className='uppercase rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-800 px-2 py-1'>
-                        <FontAwesomeIcon icon={faPlus}/>
-                        <span className='ml-2'>Create</span>
-                    </Button>
-                </NavLink>
+                <div className='relative flex w-96'>
+                    <div className='absolute flex self-center left-2 text-purple-900'>
+                        <FontAwesomeIcon icon={faSearch}/>
+                    </div>
+                    <Input name='search' className='px-7 border border-purple-900'
+                           onChange={(event) => setSearch(event.target.value)} value={filterParams.search}/>
+                </div>
+                <div className='flex'>
+                    <NavLink to={ADMIN_POSTS_CREATE_PAGE}>
+                        <Button
+                            className='uppercase h-full rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-800 px-2 py-1'>
+                            <FontAwesomeIcon icon={faPlus}/>
+                            <span className='ml-2'>Create</span>
+                        </Button>
+                    </NavLink>
+                </div>
             </div>
             {isFetching && (
                 <p>Loading..</p>
