@@ -14,11 +14,15 @@ export const CategoriesTable = ({data, onConfirmationDelete}) => {
             columnHelper.accessor('id', {
                 id: 'id',
                 header: 'id',
-                cell: info => info.getValue()
+                cell: info => <div>
+                    {info.getValue()}
+                </div>
             }),
             columnHelper.accessor('title', {
                 header: 'title',
-                cell: info => info.getValue()
+                cell: info => <div>
+                    {info.getValue()}
+                </div>
             }),
             columnHelper.display({
                 header: 'actions',
@@ -37,7 +41,7 @@ export const CategoriesTable = ({data, onConfirmationDelete}) => {
         ]
     ), [])
     return (
-        <div className={'h-4/5 mb-3'}>
+        <div className={'mb-3'}>
             <Table templateClass='grid grid-cols-[1fr,2fr,1fr] gap-2'
                    columns={columns}
                    data={data}
