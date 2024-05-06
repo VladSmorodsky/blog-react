@@ -8,7 +8,10 @@ export const Editor = ({editor = null, content = '', onUpdate = () => {}, editab
         <div id={'editor'}>
             { editor
                 ? (
-                    <EditorContent editor={editor}/>
+                    <>
+                        <EditorMenu editor={editor}/>
+                        <EditorContent editor={editor} />
+                    </>
                 )
                 : (
                 <EditorProvider
