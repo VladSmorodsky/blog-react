@@ -1,4 +1,5 @@
 import {flexRender, getCoreRowModel, useReactTable} from "@tanstack/react-table";
+import {Fragment} from "react";
 
 export const Table = ({columns, data, templateClass}) => {
     const table = useReactTable({
@@ -12,7 +13,7 @@ export const Table = ({columns, data, templateClass}) => {
             {table.getHeaderGroups().map(headerGroup => (
                 <div key={headerGroup.id} className={`${templateClass} text-gray-700 uppercase bg-gray-200`}>
                     {headerGroup.headers.map(header => (
-                        <div key={header.id} className={'px-1 py-2'}>
+                        <div key={header.id} className={'px-1 py-2 truncate'}>
                             {header.isPlaceholder
                                 ? null
                                 : flexRender(
@@ -26,9 +27,9 @@ export const Table = ({columns, data, templateClass}) => {
             {table.getRowModel().rows.map(row => (
                 <div key={row.id} className={`${templateClass} px-1 py-2 hover:bg-gray-100`}>
                     {row.getVisibleCells().map(cell => (
-                        <div key={cell.id} className={'truncate'}>
+                        <Fragment key={cell.id}>
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </div>
+                        </Fragment>
                     ))}
                 </div>
             ))}

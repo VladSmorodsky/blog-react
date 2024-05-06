@@ -6,7 +6,7 @@ import {ADMIN_POSTS_PAGE} from "../../router";
 import {DeleteButton} from "../Button/DeleteButton";
 import {useMemo} from "react";
 
-const columnHelper = createColumnHelper(); //useMemo
+const columnHelper = createColumnHelper();
 
 export const PostsTable = ({data, onConfirmationDelete}) => {
     const columns = useMemo(() => (
@@ -18,11 +18,17 @@ export const PostsTable = ({data, onConfirmationDelete}) => {
             }),
             columnHelper.accessor('title', {
                 header: 'title',
-                cell: info => info.getValue()
+                cell: info => {
+                    return <div className='truncate'>
+                        {info.getValue()}
+                    </div>
+                }
             }),
             columnHelper.accessor('category', {
                 header: 'category',
-                cell: info => info.getValue().title
+                cell: info => {
+                    return <div className='truncate'>{info.getValue().title}</div>
+                }
             }),
             columnHelper.display({
                 header: 'actions',
@@ -41,8 +47,8 @@ export const PostsTable = ({data, onConfirmationDelete}) => {
         ]
     ), [])
     return (
-        <div className={'h-4/5 mb-3'}>
-            <Table templateClass='grid grid-cols-[1fr,7fr,4fr,2fr] gap-2'
+        <div className={'mb-3 overflow-x-auto'}>
+            <Table templateClass='grid lg:grid-cols-[1fr,5fr,2fr,2fr] grid-cols-[1fr,4fr,2fr,2fr] gap-2'
                    columns={columns}
                    data={data}
             />

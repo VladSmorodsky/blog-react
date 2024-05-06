@@ -54,7 +54,7 @@ export const AdminPostsPage = () => {
     return (
         <div className="p-2">
             <div className='flex justify-between align-middle mb-2'>
-                <div className={'uppercase font-semibold text-xl flex text-center'}>
+                <div className={'uppercase font-semibold text-xl hidden sm:flex text-center'}>
                     <span>posts</span>
                 </div>
                 <div className='relative flex w-96'>
@@ -69,7 +69,7 @@ export const AdminPostsPage = () => {
                         <Button
                             className='uppercase h-full rounded bg-indigo-600 text-white font-semibold hover:bg-indigo-800 px-2 py-1'>
                             <FontAwesomeIcon icon={faPlus}/>
-                            <span className='ml-2'>Create</span>
+                            <span className='ml-2 hidden sm:inline'>Create</span>
                         </Button>
                     </NavLink>
                 </div>
@@ -107,10 +107,10 @@ export const AdminPostsPage = () => {
                                 </PaginationButton>
                             }}
                         />
-                        <div className={'align-middle'}>
-                            <label htmlFor="pageNumber" className={'text-xl mr-2'}>Page</label>
+                        <div className={'align-middle hidden sm:flex mb-2'}>
+                            <label htmlFor="pageNumber" className={'text-lg mr-2'}>Page</label>
                             <input id={'pageNumber'} type="number"
-                                   className='text-xl w-20 border border-blue-500 px-1 py-2'
+                                   className='text-lg w-20 border border-blue-500 px-1'
                                    value={filterParams.page}
                                    onChange={(e) => setPage(e.target.value)}
                                    min='1'
